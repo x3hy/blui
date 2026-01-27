@@ -1,5 +1,5 @@
 # `Blui` Documentation
-> As of version 0.0.1
+> Documentation updated last at `Blui` version 0.0.1
 ---
 
 ## Initial commit
