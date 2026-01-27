@@ -1,3 +1,5 @@
 .vbackup/*
 .vundo/*
 
+docs/.vbackup/*
+docs/.vundo/*
