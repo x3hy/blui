@@ -18,9 +18,9 @@ The main app can have many scenes that can be switched between. each scene has a
 
 ----------------------------
 Blui is currently in early development, so for now there is only a edge release and no stable.
-wget https://raw.githubusercontent.com/x3hy/blui/refs/heads/main/blui.h
+wget https://raw.githubusercontent.com/x3hy/blui/refs/heads/master/blui.h
 
 the main file is blui.h, all other files are kept in as again this library is under construction still.
 ----------------------------
 
-No further instructions are available at this time, please read more psudo-information in the planning.txt file where I've layed out an idea of what I want Blui to do
+No further instructions are available at this time, please read more psudo-information in the docs/idea.txt file where I've layed out an idea of what I want Blui to do
