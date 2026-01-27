@@ -1,0 +1,26 @@
+#Blui 0.0.1
+Basic layer user interface.
+----------------------------
+Blui is a basic layer-based terminal user interface library. Blui works in container based "layer" teirs that run differnet sets of instructions, the main application runs the ui update loop which updates a scene which update elements on the screen. its structured like so:
+
+main app
+	-> scene1
+		-> element1
+		-> element2
+		-> element3
+	-> scene2
+		-> element1
+		-> element2
+		-> element3
+----------------------------
+
+The main app can have many scenes that can be switched between. each scene has a different set of elements on it, you could ahve one scene and many elements on it or you could have many scenes with many elements, a scene is just a container for more elements, think of it like interchangable tabs that can be shown ONE AT A TIME on the terminal.
+
+----------------------------
+Blui is currently in early development, so for now there is only a edge release and no stable.
+wget https://raw.githubusercontent.com/x3hy/blui/refs/heads/main/blui.h
+
+the main file is blui.h, all other files are kept in as again this library is under construction still.
+----------------------------
+
+No further instructions are available at this time, please read more psudo-information in the planning.txt file where I've layed out an idea of what I want Blui to do
