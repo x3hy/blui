@@ -6,11 +6,12 @@
 //
 
 #include "../blui.h"
-#include <stdio.h>
 
 int 
 main (void)
 {
-	printf ("Hello World!\n");
+	blui_element ele = {0}; 
+	blui_scene_append(100, ele);
+
 	return 0;
 }
