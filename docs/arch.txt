@@ -1,0 +1,18 @@
+there are many "scenes"
+	- A scene can have many "elements"
+		- Elements can have properties eg
+			- hover function	
+				- Run on hover
+			- click function
+				- run on click
+			- render function
+				- generates a pixel map of the element
+				- runs until the element has its "_rendered" prop is set
+			- title
+			- x and y
+			- width and height
+
+the scene has an index value, this index value represents what of the elements 
+are currently selected. If the scene has more than zero elements an element ( in
+mouse mode ) will be selected until the caret moves over another element in which
+that element will be selected instead.
