@@ -30,6 +30,3 @@ Note, if you don't have wget you can use "curl -Os <url>" instead.
 Look into "example.c" which contains a basic example of how BLUI can be used
 for terminal-style interfaces. Keep in mind this is a basic project and will
 not be updated frequently as it is mainly used for my personal projects.
-
---------------------------------
-
