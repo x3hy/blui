@@ -19,10 +19,14 @@ specific functions.
 --------------------------------
 
 How to use:
-To Use BLUI simply include the main "blui.h" file into your project. Currently
-there are no releases so you can download the latest edge version like so:
+To Use BLUI simply include the main "blui.h" file into your project. You
+can download the latest edge version like so:
 
 wget https://raw.githubusercontent.com/x3hy/blui/refs/heads/main/blui.h
+
+And here is the latest STABLE release:
+
+wget https://raw.githubusercontent.com/x3hy/blui/refs/tags/1.0.0/blui.h
 
 Note, if you don't have wget you can use "curl -Os <url>" instead.
 
