@@ -12,6 +12,8 @@ Features:
 - Completely static allocation (no stdlib.h).
 - Very basic usage and low-level implementation.
 - Optimised for Speed and a markup style.
+- C & C++ support.
+- Cross platform (Windows, Mac and Linux).
 
 BLUI works on a basis of elements and tagging. You can create elements and
 give them a tag/category then you can choose to draw specific tags using
