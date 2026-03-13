@@ -19,8 +19,7 @@ struct blui_e {
 	char *desc;
 	int _id;
 	int _txt;
-	int _rgt;
-	int _ctr;
+	int _offset;
 };
 
 struct blui {
@@ -33,7 +32,7 @@ struct blui {
 	int _size; // client maximum
 };
 
-struct blui _BLUI; // global BLUI app structure
+static struct blui _BLUI; // global BLUI app structure
 #define ANSI_SPACE_SIZE 32
 
 // initializes an app
@@ -126,17 +125,60 @@ static int blui_draw (int id, print_func printf)
 		if (e._id == id || id == -1)
 		  {
 			if (e._txt)
-			  {
-				if (e._rgt)      _blui_draw_text((e.w - _blui_strlen(e.desc) + 2 - e.x), e.y, e.desc, printf);
-				else if (e._ctr) _blui_draw_text(e.x + (e.w/2) - (_blui_strlen(e.desc)/2) + 1, e.y, e.desc, printf);
-				else             _blui_draw_text(e.x, e.y, e.desc, printf);
-			  }
-			else                 _blui_draw_box(e.x, e.y, e.w, e.h, printf);
+				_blui_draw_text(e.x, e.y, e.desc, printf);
+			else _blui_draw_box(e.x, e.y, e.w, e.h, printf);
 		  }
 	}
 
 	return BLUI_SUCCESS;
 }
+
+// Creates a left aligned text inside an
+// element.
+//   id = id given to the new title.
+//   ix = index of element to shadow.
+//   of = offset, x offset.
+//    l = line number, line number of ix.
+// text = text you want to display.
+//
+#define TEXT(id, ix, of, l, text)\
+	_blui_c_client(id, (struct blui_e){\
+		.x = _BLUI.clients[ix].x + of,\
+		.y = l,\
+		.desc = text,\
+		._txt = 1\
+		._offset = of\
+	})
+
+// Move text to the right
+#define TEXT_RIGHT(px, ex)\
+	do {\
+		_BLUI.clients[ex].x =\
+			+ _BLUI.clients[px].x\
+			+ _BLUI.clients[px].w\
+			- _blui_strlen(BLUI.clients[ex].desc)\
+			- _BLUI.clients[ex]._offset;\
+	while (0)
+
+// Move text to the bottom
+#define TEXT_CENTER(px, ex)\
+	do {\
+		_BLUI.clients[ex].x =\
+			_BLUI.clients[px].x + \
+			(\
+				+ _BLUI.clients[px].w\
+				+ _blui_strlen(\
+					_BLUI.clients[ex].desc\
+				)\
+			) / 2\
+			- _BLUI.clients[ex]._offset; \
+	while (0)
+
+// modifier for other text elements, that moves
+// them to the bottom of the parent element.
+#define TEXT_DOWN(px, ex) \
+	_BLUI.clients[ex].h = _BLUI.clients[px].h-1
+
 
 #ifdef __cplusplus
 }

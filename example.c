@@ -24,42 +24,39 @@ int main(void) {
 	);
 
 	// Song name
-	/* TEXT_LEFT ( */
-	/* 	WINDOW_1, fr, 2, */
-	/* 	"Track Name - Album" */
-	/* ); */
+	TEXT (WINDOW_1, fr, 3, 2,
+		"Track Name - Album"
+	);
 
 	// Artist name
-	blui_c_client(
-		WINDOW_1,
-		.x = 3, .y = 3, .w = w,
-		._txt = 1, ._rgt = 0,
-		.desc = "Artist Name",
+	TEXT (WINDOW_1, fr, 0, 3,
+		"Artist Name"
 	);
 
-	// left controls
-	blui_c_client(
-		WINDOW_1,
-		.x = 3, .y = (h-1), .w = w,
-		._txt = 1, ._rgt = 0,
-		.desc = "file stop",
-	);
+	// Left controls
+	TEXT_RIGHT(ef,
+		   TEXT (WINDOW_1, fr, 3, 0,
+		"file stop"
+	));
 
 	// right controls
-	blui_c_client(
-		WINDOW_1,
-		.x = 3, .y = (h-1), .w = w,
-		._txt = 1, ._rgt = 1,
-		.desc = "01:00/01:59"
+	TEXT_DOWN(fr,
+		TEXT_DOWN(fr,
+			TEXT(WINDOW_1, fr, 3, 0,
+				"01:00/01:59"
+			)
+		)
+	);
+	
+	// Center controls
+	TEXT_DOWN(fr,
+		TEXT_CENTER(	
+			TEXT(WINDOW_1, fr, 3, 0,
+				"0.25"
+			)
+		)
 	);
 
-	// Center controls
-	blui_c_client(
-		WINDOW_2,
-		.x = 0 , .y = (h-1), .w = w,
-		._txt = 1, ._ctr = 1,
-		.desc = "0.25"
-	);
 	
 	// Draw the clients
 	blui_draw(-1, printf);
@@ -67,5 +64,8 @@ int main(void) {
 	fflush(stdout);
 
 	// wait infinitely
+	while(1){}
+
+	blui_exit();
 	return 0;
 }
