@@ -13,10 +13,10 @@ int main(void) {
 	_blui_c_app  (elements,10);
 	enum { WINDOW_0, WINDOW_1, WINDOW_2 };
 
-	int w = 40, h = 20;
+	const int w = 40, h = 20;
 
-	// main window
-	blui_c_client(
+	// main window frame
+	const int fr = blui_c_client(
 		WINDOW_0,
 		.x =  1, .y =  1,
 		.w = w, .h = h,
@@ -24,12 +24,10 @@ int main(void) {
 	);
 
 	// Song name
-	blui_c_client(
-		WINDOW_1,
-		.x = 3, .y = 2, .w = w,
-		._txt = 1, ._rgt = 0,
-		.desc = "Track Name - Album",
-	);
+	/* TEXT_LEFT ( */
+	/* 	WINDOW_1, fr, 2, */
+	/* 	"Track Name - Album" */
+	/* ); */
 
 	// Artist name
 	blui_c_client(
@@ -69,8 +67,5 @@ int main(void) {
 	fflush(stdout);
 
 	// wait infinitely
-	while(1){}
-
-	blui_exit();
 	return 0;
 }
