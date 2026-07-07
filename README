@@ -1,34 +1,4 @@
-BlUI 1.0.0
---------------------------------
-BLUI is a terminal graphics library for creating interfaces. BLUI is more of
-an API with some extra features than an actual TUI specific library. BLUI is
-just a low-level and basic API for interacting with windows and text elements
-on a screen. Its possible to use BLUI for window management on larger
-projects outside of the terminal!
+BLUI is as basic rendering engine for the terminal. Use the included cube.c
+example for documentation.
 
-Features:
-- Header only library.
-- Tiny file size.
-- Completely static allocation (no stdlib.h).
-- Very basic usage and low-level implementation.
-- Optimised for Speed and a markup style.
-- C & C++ support.
-- Cross platform (Windows, Mac and Linux).
-
-BLUI works on a basis of elements and tagging. You can create elements and
-give them a tag/category then you can choose to draw specific tags using
-specific functions.
---------------------------------
-
-How to use:
-To Use BLUI simply include the main "blui.h" file into your project. You
-can download the latest edge version like so:
-
-wget https://raw.githubusercontent.com/x3hy/blui/refs/heads/master/blui.h
-
-Note, if you don't have wget you can use "curl -Os <url>" instead.
-
---------------------------------
-Look into "example.c" which contains a basic example of how BLUI can be used
-for terminal-style interfaces. Keep in mind this is a basic project and will
-not be updated frequently as it is mainly used for my personal projects.
+cc cube.c -o cube && ./cube
