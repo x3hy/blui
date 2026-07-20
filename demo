@@ -1,0 +1,57 @@
+#!/bin/sh
+
+menu_choice=""
+function menu(){
+	local list="$1"
+	local prompt="$2"
+	
+	code=-1
+	pos=0
+	max=$(echo "$list" | wc -l)
+
+	while [ 1 ]; do
+		clear
+		i=0;
+
+		# Draw the menu
+		echo "$code"
+		while read line; do
+			if [ $i -eq $((pos % $max)) ]; then
+
+				# Enter pressed
+				if [ $code -eq 0 ]; then
+					menu_choice="$line"
+					return 0;
+				fi
+				echo -e "\033[32m> $line\033[0m"
+			else echo "  $line"; fi
+			i=$((i+1))
+		done <<EOF
+$list
+EOF
+
+		# Input handling
+		read -n 1 -s -r last
+		code=$(printf '%d' "'$last")
+		case "$last" in
+			"A")
+				pos=$((pos-1))
+			;;
+			"B")
+				pos=$((pos+1))
+			;;
+		esac
+	done
+}
+
+
+DEMO_FOLDER="shapes/"
+menu "$(find $DEMO_FOLDER | tail -n+2 )" "Select a shape file"
+clear
+tmp=$(mktemp --suffix=".c")
+echo "#include \"$menu_choice\"" > "$tmp"
+cat render.c >> "$tmp"
+mv "$tmp" .tmp.c
+gcc ".tmp.c"
+./a.out
+rm "$tmp" .tmp.c

@@ -3,11 +3,6 @@
 #include <sys/ioctl.h>
 #include "blui.h"
 
-// INCLUDE THE SHAPE CONFIG
-// the config must include a vectors and an edges array
-
-#include "shapes/parellel_triangle.h"
-
 int usleep(__useconds_t usec);
 
 // Get the screen size
@@ -23,7 +18,7 @@ struct pixel frame(struct pixel px){
 	/* px = rotate_z(px, angle); */
 	px = rotate_z(px, angle);
 	px = rotate_y(px, angle);
-	px.z += 20;
+	px.z += 60;
 	return px;
 }
 
@@ -57,9 +52,8 @@ int main(){
 			b = frame(b);
 			draw_line(term, a, b, (struct pixel){
 				.fill = '#',
-				.red = 'O',
-				.green = 255,
-				.blue = 0
+				.pre = "\033[32m",
+				.suf = "\033[0m",
 			}, (double)term.max_y*4);
 		}
 
@@ -70,9 +64,10 @@ int main(){
 				.y = vectors[j][1],
 				.z = vectors[j][2],
 				.fill = '$',
+				.color = 1,
 				.red = 255,
 				.green = 0,
-				.blue = 0
+				.blue = 0,
 			};
 
 			// Rotate xz

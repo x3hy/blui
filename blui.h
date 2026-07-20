@@ -15,8 +15,8 @@ extern "C" {
 	fflush(stdout);
 
 struct pixel {
-	char fill;
-	int red, green, blue;
+	char fill, *pre, *suf;
+	int red, green, blue, color;
 	double x, y, z;
 };
 
@@ -85,7 +85,6 @@ static struct pixel project(struct screen dpy, struct pixel px, double focal){
 	int relx = dpy.mean_x + (focal * zx);
 	int rely = dpy.mean_y + (focal * zy);
 
-
 	out.x = relx;
 	out.y = rely;
 	return out;
@@ -97,9 +96,13 @@ static int draw_pixel(struct screen dpy, struct pixel px){
 	if (px.x > dpy.max_x || px.y > dpy.max_y || px.y < 0 || px.x < 0)
 		return 1;
 
-	// Print the pixel at certain location
-	printf("\033[%d;%dH\033[38;2;%d;%d;%dm%c\033[0m", (int)px.x, (int)px.y,
-			px.red, px.green, px.blue, px.fill);
+	printf("\033[%d;%dH", (int)px.x, (int)px.y);
+	if (px.color){
+		// Print the pixel at certain location
+		printf("\033[38;2;%d;%d;%dm%c\033[0m", px.red, px.green, px.blue, px.fill);
+	} else {
+		printf("%s%c%s\n", px.pre, px.fill, px.suf);
+	}
 
 	fflush(stdout);
 	return 0;
