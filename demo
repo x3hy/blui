@@ -1,11 +1,16 @@
 #!/bin/sh
 
+get_key() {
+	stty raw -echo
+	char=$(dd bs=1 count=1 2>/dev/null)
+	stty -raw echo
+	printf '%s' "$char"
+}
+
 menu_choice=""
-function menu(){
-	local list="$1"
-	local prompt="$2"
-	
-	code=-1
+menu(){
+	list="$1"
+	prompt="$2"
 	last="A"
 	pos=0
 
@@ -16,22 +21,18 @@ function menu(){
 		# Draw the menu
 		while read line; do
 			if [ $i -eq $((pos % $(echo "$list" | wc -l))) ]; then
-				echo -e "\033[32m>$line\033[0m"
-
-				if [ $(printf '%d' "'$last") -eq 0 ]; then
+				printf "\033[32m>$line\033[0m\n"
+				if [ "$last" = $'\n' ] || [ "$last" = $'\r' ]; then
 					menu_choice="$line"
 					return 0;
 				fi
-			else echo "$line"; fi
-
-			# Enter pressed
-
-			# Handle arrow keys
+			else printf "$line\n"; fi
 			i=$((i+1))
 done <<EOF
 $list
 EOF
-		read -n 1 -s -r last
+		# Handle arrow keys
+		last=$(get_key)
 		[ "$last" = "A" ] && pos=$((pos-1));
 		[ "$last" = "B" ] && pos=$((pos+1));
 	done
