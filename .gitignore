@@ -5,3 +5,4 @@ docs/.vbackup/*
 docs/.vundo/*
 test
 .tmp.c
+a.out
