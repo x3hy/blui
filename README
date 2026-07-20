@@ -1,5 +1,4 @@
 Basic 3d rendering engine for the terminal.
 ---
 
-The "shapes" folder contains configurations for a few different shapes, include a shape in render.c, compile with the following:
-gcc render.c -o blui && ./blui
+The shapes directory contains some separate shapes which can be rendered with render.c. To render a shape simply run the ./demo file and use the arrow keys to select a shape to draw.

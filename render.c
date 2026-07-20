@@ -18,6 +18,8 @@ struct pixel frame(struct pixel px){
 	/* px = rotate_z(px, angle); */
 	px = rotate_z(px, angle);
 	px = rotate_y(px, angle);
+
+	// initial Distance from camera
 	px.z += 60;
 	return px;
 }

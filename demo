@@ -6,8 +6,8 @@ function menu(){
 	local prompt="$2"
 	
 	code=-1
+	last="A"
 	pos=0
-	max=$(echo "$list" | wc -l)
 
 	while [ 1 ]; do
 		clear
@@ -15,42 +15,39 @@ function menu(){
 
 		# Draw the menu
 		while read line; do
-			if [ $i -eq $((pos % $max)) ]; then
+			if [ $i -eq $((pos % $(echo "$list" | wc -l))) ]; then
+				echo -e "\033[32m>$line\033[0m"
 
-				# Enter pressed
-				if [ $code -eq 0 ]; then
+				if [ $(printf '%d' "'$last") -eq 0 ]; then
 					menu_choice="$line"
 					return 0;
 				fi
-				echo -e "\033[32m> $line\033[0m"
-			else echo "  $line"; fi
+			else echo "$line"; fi
+
+			# Enter pressed
+
+			# Handle arrow keys
 			i=$((i+1))
-		done <<EOF
+done <<EOF
 $list
 EOF
-
-		# Input handling
 		read -n 1 -s -r last
-		code=$(printf '%d' "'$last")
-		case "$last" in
-			"A")
-				pos=$((pos-1))
-			;;
-			"B")
-				pos=$((pos+1))
-			;;
-		esac
+		[ "$last" = "A" ] && pos=$((pos-1));
+		[ "$last" = "B" ] && pos=$((pos+1));
 	done
 }
-
 
 DEMO_FOLDER="shapes/"
 menu "$(find $DEMO_FOLDER | tail -n+2 )" "Select a shape file"
 clear
+
+# Generate temp file including the selected file
 tmp=$(mktemp --suffix=".c")
 echo "#include \"$menu_choice\"" > "$tmp"
 cat render.c >> "$tmp"
 mv "$tmp" .tmp.c
+
+# Compile and run
 gcc ".tmp.c"
 ./a.out
 rm "$tmp" .tmp.c
