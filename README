@@ -1,4 +1,5 @@
-BLUI is as basic rendering engine for the terminal. Use the included cube.c
-example for documentation.
+Basic 3d rendering engine for the terminal.
+---
 
-cc cube.c -o cube && ./cube
+The "shapes" folder contains configurations for a few different shapes, include a shape in render.c, compile with the following:
+gcc render.c -o blui && ./blui

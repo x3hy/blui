@@ -3,6 +3,11 @@
 #include <sys/ioctl.h>
 #include "blui.h"
 
+// INCLUDE THE SHAPE CONFIG
+// the config must include a vectors and an edges array
+
+#include "shapes/parellel_triangle.h"
+
 int usleep(__useconds_t usec);
 
 // Get the screen size
@@ -24,26 +29,6 @@ struct pixel frame(struct pixel px){
 
 // main display loop
 int main(){
-	const double vectors[][3] = {
-		// x y z
-		{  0.5,  0.5, 0.5},
-		{  0.5, -0.5, 0.5},
-		{ -0.5, -0.5, 0.5},
-		{ -0.5,  0.5, 0.5},
-
-		{  0.5,  0.5, -0.5},
-		{  0.5, -0.5, -0.5},
-		{ -0.5, -0.5, -0.5},
-		{ -0.5,  0.5, -0.5},
-	};
-
-	// Connecting points
-	const int edges[][2] = {
-		{0,1},{1,2},{2,3},{3,0},
-		{4,5},{5,6},{6,7},{7,4},
-		{0,4},{1,5},{2,6},{3,7}
-	};
-
 	const int VEC_LEN = sizeof(vectors) / sizeof(vectors[0]);
 	const int EDGE_LEN = sizeof(edges) / sizeof(edges[0]);
 	int fps = 120;
@@ -71,8 +56,8 @@ int main(){
 			a = frame(a);
 			b = frame(b);
 			draw_line(term, a, b, (struct pixel){
-				.fill = 'L',
-				.red = 0,
+				.fill = '#',
+				.red = 'O',
 				.green = 255,
 				.blue = 0
 			}, (double)term.max_y*4);
@@ -84,7 +69,7 @@ int main(){
 				.x = vectors[j][0],
 				.y = vectors[j][1],
 				.z = vectors[j][2],
-				.fill = 'P',
+				.fill = '$',
 				.red = 255,
 				.green = 0,
 				.blue = 0

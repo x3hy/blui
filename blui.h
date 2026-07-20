@@ -43,7 +43,7 @@ static double fast_sin(double x){
 	
 	if (x > HALF_PI) x = PI - x;
 	double x2 = x * x;
-	
+
 	double y =
 		(((-2.3889859e-08 * x2 +
 			2.7525562e-06) * x2 -
