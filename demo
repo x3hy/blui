@@ -14,7 +14,6 @@ function menu(){
 		i=0;
 
 		# Draw the menu
-		echo "$code"
 		while read line; do
 			if [ $i -eq $((pos % $max)) ]; then
 
